@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetWish — Adoção Inteligente e Responsável</title>
+  <meta name="description" content="Plataforma brasileira de adoção responsável de animais. Matching por estilo de vida, verificação real e acompanhamento de 90 dias." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600;1,9..144,700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #2E5A88;
+      --primary-dark: #1F3F61;
+      --primary-light: #4A7BB3;
+      --accent: #E8743B;
+      --accent-dark: #C25826;
+      --accent-light: #F4A578;
+      --cream: #FBF7F1;
+      --cream-deep: #F2EBDE;
+      --off-white: #F8F5F0;
+      --sage: #8FA68E;
+      --sage-light: #C7D3C6;
+      --ink: #1A2332;
+      --ink-soft: #3D4654;
+      --gray: #5C6470;
+      --gray-soft: #8A93A0;
+      --border: #E5DDD0;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Manrope', -apple-system, sans-serif;
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+      --space-3xl: 9rem;
+      --max-width: 1280px;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 999px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    ul { list-style: none; }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .display-xl {
+      font-family: var(--font-display);
+      font-size: clamp(2.75rem, 7vw, 5.5rem);
+      font-weight: 500;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      color: var(--primary-dark);
+    }
+    .display-lg {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 5vw, 3.75rem);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--primary-dark);
+    }
+    .italic { font-style: italic; font-weight: 400; color: var(--accent); }
+    .body-lg { font-size: 1.125rem; line-height: 1.65; color: var(--ink-soft); }
+    .body-md { font-size: 1rem; line-height: 1.6; color: var(--ink-soft); }
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .section { padding: var(--space-3xl) 0; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.75rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 14px -2px rgba(232, 116, 59, 0.35);
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px -4px rgba(232, 116, 59, 0.45);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary-dark);
+      border: 1.5px solid var(--primary-dark);
+    }
+    .btn-secondary:hover {
+      background: var(--primary-dark);
+      color: white;
+    }
+    .btn-ghost { color: var(--ink); padding: 0.5rem 1rem; }
+    .btn-ghost:hover { color: var(--accent); }
+    .btn-lg { padding: 1.125rem 2.25rem; font-size: 1rem; }
+    .btn .icon { width: 18px; height: 18px; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(251, 247, 241, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      letter-spacing: -0.02em;
+    }
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    .logo-mark .icon { width: 20px; height: 20px; }
+    .logo-name span { color: var(--accent); font-style: italic; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta { display: flex; align-items: center; gap: 0.75rem; }
+
+    .hero {
+      position: relative;
+      padding: var(--space-2xl) 0 var(--space-3xl);
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at top left, rgba(232, 116, 59, 0.08), transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(46, 90, 136, 0.06), transparent 50%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.9rem;
+      background: rgba(232, 116, 59, 0.1);
+      border: 1px solid rgba(232, 116, 59, 0.2);
+      border-radius: var(--radius-full);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--accent-dark);
+      margin-bottom: 1.75rem;
+    }
+    .hero-tag .icon { width: 14px; height: 14px; }
+    .hero-headline { margin-bottom: 1.75rem; }
+    .hero-sub {
+      font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .stat .number {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat .label {
+      font-size: 0.8125rem;
+      color: var(--gray);
+      margin-top: 0.4rem;
+      max-width: 180px;
+    }
+
+    .hero-visual { position: relative; height: 580px; }
+    .card-pet {
+      position: absolute;
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 1px 2px rgba(26, 35, 50, 0.04), 0 12px 32px -8px rgba(26, 35, 50, 0.12);
+      overflow: hidden;
+      transition: transform 0.4s ease;
+    }
+    .card-pet:hover { transform: translateY(-4px) rotate(0deg) !important; }
+    .card-pet-1 { width: 240px; top: 0; right: 40px; transform: rotate(3deg); z-index: 3; }
+    .card-pet-2 { width: 220px; top: 180px; left: 0; transform: rotate(-4deg); z-index: 2; }
+    .card-pet-3 { width: 230px; bottom: 30px; right: 0; transform: rotate(2deg); z-index: 1; }
+    .pet-image {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    .pet-image.pet-1 { background: linear-gradient(135deg, #F4D8C0, #E8A578); }
+    .pet-image.pet-2 { background: linear-gradient(135deg, #C7D3C6, #8FA68E); }
+    .pet-image.pet-3 { background: linear-gradient(135deg, #D4C5E0, #A89BC4); }
+    .pet-image .icon { width: 64px; height: 64px; opacity: 0.6; stroke-width: 1.5; }
+    .pet-body { padding: 1rem 1.1rem 1.1rem; }
+    .pet-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 0.2rem;
+    }
+    .pet-meta { font-size: 0.8125rem; color: var(--gray); margin-bottom: 0.7rem; }
+    .pet-score {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.6rem;
+      background: rgba(143, 166, 142, 0.18);
+      color: #5A7559;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .pet-score .icon { width: 12px; height: 12px; }
+
+    .hero-decoration {
+      position: absolute;
+      bottom: -10px;
+      left: 20px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--accent);
+      transform: rotate(-6deg);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 4;
+    }
+    .hero-decoration::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .timeline-section {
+      background: var(--primary-dark);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .timeline-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(232, 116, 59, 0.15), transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(143, 166, 142, 0.1), transparent 50%);
+      pointer-events: none;
+    }
+    .timeline-section .eyebrow { color: var(--accent-light); }
+    .timeline-section .display-lg { color: white; }
+    .timeline-section .body-lg { color: rgba(255, 255, 255, 0.75); }
+    .timeline-header { max-width: 720px; margin-bottom: var(--space-xl); position: relative; }
+    .timeline-header .eyebrow { margin-bottom: 1rem; }
+    .timeline-header .display-lg { margin-bottom: 1.25rem; }
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+      padding-top: 3rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 3.6rem;
+      left: 6%;
+      right: 6%;
+      height: 2px;
+      background: linear-gradient(to right, transparent, rgba(232, 116, 59, 0.6), rgba(232, 116, 59, 0.6), transparent);
+    }
+    .timeline-step { position: relative; text-align: center; }
+    .timeline-dot {
+      width: 24px;
+      height: 24px;
+      background: var(--accent);
+      border: 4px solid var(--primary-dark);
+      border-radius: 50%;
+      margin: 0 auto 1.25rem;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 0 2px rgba(232, 116, 59, 0.4);
+    }
+    .timeline-day {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent-light);
+      margin-bottom: 0.5rem;
+    }
+    .timeline-label { font-size: 0.875rem; font-weight: 600; color: white; margin-bottom: 0.4rem; }
+    .timeline-desc { font-size: 0.8125rem; line-height: 1.5; color: rgba(255, 255, 255, 0.65); }
+
+    .differentials-header { max-width: 720px; margin: 0 auto var(--space-xl); text-align: center; }
+    .differentials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .diff-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.75rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .diff-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px -12px rgba(46, 90, 136, 0.15);
+    }
+    .diff-card:nth-child(2), .diff-card:nth-child(5) { transform: translateY(20px); }
+    .diff-card:nth-child(2):hover, .diff-card:nth-child(5):hover { transform: translateY(16px); }
+    .diff-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(232, 116, 59, 0.1);
+      color: var(--accent);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .diff-icon .icon { width: 26px; height: 26px; }
+    .diff-title {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .diff-desc { font-size: 0.95rem; line-height: 1.6; color: var(--ink-soft); }
+    .diff-tag {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 0.875rem;
+      color: var(--gray-soft);
+    }
+
+    .how-section { background: var(--cream-deep); }
+    .how-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-xl);
+      align-items: end;
+    }
+    .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    .how-step {
+      background: white;
+      padding: 2rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .how-step-num {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 3rem;
+      font-weight: 500;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0.85;
+    }
+    .how-step-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+    .how-step-desc { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.55; }
+
+    .protectors-section { background: var(--primary-dark); color: white; position: relative; overflow: hidden; }
+    .protectors-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--space-2xl); align-items: center; }
+    .protectors-content .eyebrow { color: var(--accent-light); margin-bottom: 1.25rem; }
+    .protectors-content .display-lg { color: white; margin-bottom: 1.5rem; }
+    .protectors-content .body-lg { color: rgba(255, 255, 255, 0.75); margin-bottom: 2rem; }
+    .feature-list { display: grid; gap: 1rem; margin-bottom: 2.5rem; }
+    .feature-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .feature-item:first-child { border-top: none; padding-top: 0; }
+    .feature-check {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-top: 2px;
+    }
+    .feature-check .icon { width: 16px; height: 16px; }
+    .feature-text { color: rgba(255, 255, 255, 0.9); font-size: 1rem; }
+    .feature-text strong { color: white; font-weight: 600; }
+
+    .quote-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      position: relative;
+    }
+    .quote-mark {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      line-height: 0.8;
+      color: var(--accent);
+      opacity: 0.6;
+      margin-bottom: 0.5rem;
+    }
+    .quote-text {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.5rem;
+      line-height: 1.4;
+      color: white;
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+    .quote-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .author-avatar {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+    .author-name { font-weight: 600; color: white; margin-bottom: 0.15rem; }
+    .author-role { font-size: 0.875rem; color: rgba(255, 255, 255, 0.65); }
+
+    .impact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .impact-card { padding: 2rem 0; border-top: 2px solid var(--primary-dark); }
+    .impact-card:nth-child(even) { border-top-color: var(--accent); }
+    .impact-number {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 4vw, 3.25rem);
+      font-weight: 500;
+      color: var(--primary-dark);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .impact-card:nth-child(even) .impact-number { color: var(--accent); }
+    .impact-label { font-size: 0.95rem; line-height: 1.5; color: var(--ink-soft); max-width: 220px; }
+
+    .faq-section { background: var(--cream-deep); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-2xl); align-items: start; }
+    .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .faq-item {
+      background: white;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .faq-item:hover { border-color: var(--accent); }
+    .faq-item[open] { border-color: var(--accent); box-shadow: 0 4px 16px -4px rgba(46, 90, 136, 0.08); }
+    .faq-item summary {
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-family: var(--font-display);
+      font-size: 1.0625rem;
+      font-weight: 500;
+      color: var(--primary-dark);
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary .icon {
+      width: 20px;
+      height: 20px;
+      color: var(--accent);
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    .faq-item[open] summary .icon { transform: rotate(45deg); }
+    .faq-answer { padding: 0 1.5rem 1.5rem; font-size: 0.95rem; line-height: 1.65; color: var(--ink-soft); }
+
+    .cta-section { padding: var(--space-3xl) 0; text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(232, 116, 59, 0.08), transparent 60%);
+    }
+    .cta-content { position: relative; max-width: 720px; margin: 0 auto; }
+    .cta-content .display-xl { margin-bottom: 1.5rem; }
+    .cta-content .body-lg { margin-bottom: 2.5rem; }
+    .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .cta-note {
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .cta-note .icon { width: 16px; height: 16px; color: var(--sage); }
+
+    .footer { background: var(--primary-dark); color: rgba(255, 255, 255, 0.7); padding: var(--space-2xl) 0 var(--space-lg); }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: var(--space-xl); margin-bottom: 3rem; }
+    .footer-brand .logo { color: white; }
+    .footer-brand .logo-name span { color: var(--accent-light); }
+    .footer-tagline { margin-top: 1.25rem; font-size: 0.9rem; max-width: 320px; line-height: 1.6; }
+    .footer-col-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-links a { font-size: 0.9rem; color: rgba(255, 255, 255, 0.65); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent-light); }
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .social-icons { display: flex; gap: 0.75rem; }
+    .social-icons a {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.7);
+      transition: all 0.2s;
+    }
+    .social-icons a:hover { background: var(--accent); border-color: var(--accent); color: white; }
+    .social-icons .icon { width: 16px; height: 16px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatGentle {
+      0%, 100% { transform: rotate(3deg) translateY(0); }
+      50% { transform: rotate(3deg) translateY(-8px); }
+    }
+    .hero-tag, .hero-headline, .hero-sub, .hero-actions, .hero-stats {
+      animation: fadeUp 0.7s ease-out both;
+    }
+    .hero-headline { animation-delay: 0.05s; }
+    .hero-sub { animation-delay: 0.15s; }
+    .hero-actions { animation-delay: 0.25s; }
+    .hero-stats { animation-delay: 0.35s; }
+    .card-pet-1 { animation: fadeUp 0.8s ease-out 0.3s both, floatGentle 6s ease-in-out 1.5s infinite; }
+
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 4rem; }
+      .hero-visual { height: 460px; }
+      .differentials-grid { grid-template-columns: repeat(2, 1fr); }
+      .diff-card:nth-child(2), .diff-card:nth-child(5) { transform: none; }
+      .timeline { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+      .timeline::before { display: none; }
+      .how-grid { grid-template-columns: repeat(2, 1fr); }
+      .how-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .protectors-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .impact-grid { grid-template-columns: repeat(2, 1fr); }
+      .faq-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .section, .cta-section { padding: 4rem 0; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .stat .number { font-size: 1.75rem; }
+      .differentials-grid { grid-template-columns: 1fr; }
+      .timeline { grid-template-columns: repeat(2, 1fr); }
+      .how-grid { grid-template-columns: 1fr; }
+      .impact-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .hero-visual { height: 420px; }
+      .card-pet-1, .card-pet-2, .card-pet-3 { width: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="4" cy="8" r="2"/><circle cx="11" cy="15" r="2"/><path d="M8 22a4 4 0 0 1-4-4 7 7 0 0 1 7-7 7 7 0 0 1 7 7 4 4 0 0 1-4 4 2.5 2.5 0 0 1-1.5-.5 2.5 2.5 0 0 0-3 0A2.5 2.5 0 0 1 8 22Z"/></svg>
+        </span>
+        <span class="logo-name">Pet<span>Wish</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#protetoras">Para ONGs</a>
+        <a href="#faq">Dúvidas</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#" class="btn btn-ghost">Entrar</a>
+        <a href="#" class="btn btn-primary">
+          Quero adotar
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <div class="hero-tag">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+          A primeira plataforma de adoção que acompanha 90 dias
+        </div>
+        <h1 class="display-xl hero-headline">
+          Adote com <span class="italic">inteligência</span><br>
+          e seja <span class="italic">acompanhado</span> de verdade.
+        </h1>
+        <p class="hero-sub">
+          A PetWish conecta você ao pet certo para o seu estilo de vida, verifica adotantes
+          com seriedade e oferece suporte real nos primeiros 90 dias — porque adoção é
+          processo, não evento.
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary btn-lg">
+            Encontrar meu match
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"/><path d="m18 15-2-2"/><path d="m15 18-2-2"/></svg>
+          </a>
+          <a href="#protetoras" class="btn btn-secondary btn-lg">
+            Sou protetora
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="number">30M+</div>
+            <div class="label">animais abandonados no Brasil (OMS)</div>
+          </div>
+          <div class="stat">
+            <div class="number">87%</div>
+            <div class="label">pedem suporte pós-adoção</div>
+          </div>
+          <div class="stat">
+            <div class="number">&lt;15%</div>
+            <div class="label">nossa meta de devolução (mercado: até 85%)</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="card-pet card-pet-1">
+          <div class="pet-image pet-1">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.25 16.25h1.5L12 17z"/><path d="M16 14v.5"/><path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309"/><path d="M8 14v.5"/><path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.144-3.95 4-4 1.25-.022 1.875.625 2 1.25"/><path d="M21.5 9.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.144-3.95 4-4 1.25-.022 1.875.625 2 1.25z"/></svg>
+          </div>
+          <div class="pet-body">
+            <div class="pet-name">Bidu</div>
+            <div class="pet-meta">2 anos · Porte médio · Recife</div>
+            <div class="pet-score">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+              Match 92%
+            </div>
+          </div>
+        </div>
+        <div class="card-pet card-pet-2">
+          <div class="pet-image pet-2">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z"/><path d="M8 14v.5"/><path d="M16 14v.5"/><path d="M11.25 16.25h1.5L12 17z"/></svg>
+          </div>
+          <div class="pet-body">
+            <div class="pet-name">Luna</div>
+            <div class="pet-meta">1 ano · Porte pequeno · Olinda</div>
+            <div class="pet-score">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+              Match 87%
+            </div>
+          </div>
+        </div>
+        <div class="card-pet card-pet-3">
+          <div class="pet-image pet-3">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.25 16.25h1.5L12 17z"/><path d="M16 14v.5"/><path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309"/><path d="M8 14v.5"/><path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.144-3.95 4-4 1.25-.022 1.875.625 2 1.25"/><path d="M21.5 9.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.144-3.95 4-4 1.25-.022 1.875.625 2 1.25z"/></svg>
+          </div>
+          <div class="pet-body">
+            <div class="pet-name">Theo</div>
+            <div class="pet-meta">4 anos · Porte grande · Recife</div>
+            <div class="pet-score">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+              Match 81%
+            </div>
+          </div>
+        </div>
+        <div class="hero-decoration">matching com critério</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section timeline-section">
+    <div class="container">
+      <div class="timeline-header">
+        <div class="eyebrow">Acompanhamento de 90 dias</div>
+        <h2 class="display-lg">
+          A maioria das plataformas <span class="italic">termina onde a gente começa.</span>
+        </h2>
+        <p class="body-lg">
+          Adoção não é uma entrega — é uma adaptação. Por isso a PetWish acompanha você
+          em seis pontos de check-in nos primeiros 90 dias, com conteúdo, suporte da
+          protetora original e clínicas veterinárias parceiras.
+        </p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day">Dia 3</div>
+          <div class="timeline-label">Primeiros dias</div>
+          <div class="timeline-desc">Como introduzir o pet ao ambiente novo sem trauma.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day">Dia 7</div>
+          <div class="timeline-label">Rotina</div>
+          <div class="timeline-desc">Estabelecendo horários de alimentação e descanso.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day">Dia 15</div>
+          <div class="timeline-label">Fim do trial</div>
+          <div class="timeline-desc">Encerramento do Período de Adaptação Formalizado.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day">Dia 30</div>
+          <div class="timeline-label">Vet check</div>
+          <div class="timeline-desc">Cupom para 1ª consulta em clínica parceira.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day">Dia 60</div>
+          <div class="timeline-label">Comportamento</div>
+          <div class="timeline-desc">Orientação sobre treinamento e socialização.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day">Dia 90</div>
+          <div class="timeline-label">Adoção sólida</div>
+          <div class="timeline-desc">Caso de sucesso registrado. Tudo deu certo.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="diferenciais">
+    <div class="container">
+      <div class="differentials-header">
+        <div class="eyebrow">Por que somos diferentes</div>
+        <h2 class="display-lg">Seis camadas que ninguém junta <span class="italic">em um lugar só.</span></h2>
+        <p class="body-lg" style="margin-top: 1.25rem;">
+          Tecnologia, verificação, formalização jurídica e cuidado contínuo — combinados
+          para reduzir a devolução de 85% (mercado) para menos de 15% (nossa meta).
+        </p>
+      </div>
+      <div class="differentials-grid">
+        <div class="diff-card">
+          <div class="diff-tag">01</div>
+          <div class="diff-icon">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+          </div>
+          <h3 class="diff-title">PetMatch</h3>
+          <p class="diff-desc">Algoritmo que cruza 12 atributos de estilo de vida do adotante com o perfil comportamental real do animal. Score explicado de 0 a 100.</p>
+        </div>
+        <div class="diff-card">
+          <div class="diff-tag">02</div>
+          <div class="diff-icon">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"/><path d="m18 15-2-2"/><path d="m15 18-2-2"/></svg>
+          </div>
+          <h3 class="diff-title">PetWish Care</h3>
+          <p class="diff-desc">Acompanhamento automatizado de 90 dias via WhatsApp e app, com conteúdo educativo e canal direto com a protetora original.</p>
+        </div>
+        <div class="diff-card">
+          <div class="diff-tag">03</div>
+          <div class="diff-icon">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3 class="diff-title">PetWish Trial</h3>
+          <p class="diff-desc">Período de Adaptação formal de 15 dias com termo digital assinado eletronicamente. Devolução sem culpa se for preciso.</p>
+        </div>
+        <div class="diff-card">
+          <div class="diff-tag">04</div>
+          <div class="diff-icon">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg>
+          </div>
+          <h3 class="diff-title">PetVet Network</h3>
+          <p class="diff-desc">Primeira consulta veterinária com desconto em rede de clínicas parceiras próximas — remove a barreira financeira inicial.</p>
+        </div>
+        <div class="diff-card">
+          <div class="diff-tag">05</div>
+          <div class="diff-icon">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3 class="diff-title">PetWish Score</h3>
+          <p class="diff-desc">Verificação multicamada (CPF + endereço + vídeo-checklist) com badges Bronze, Prata e Ouro reutilizáveis em outras adoções.</p>
+        </div>
+        <div class="diff-card">
+          <div class="diff-tag">06</div>
+          <div class="diff-icon">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          </div>
+          <h3 class="diff-title">PetCRM</h3>
+          <p class="diff-desc">Painel SaaS para protetoras: gestão de animais, divulgação automatizada, relatórios financeiros e captação de doações via Pix.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section how-section" id="como-funciona">
+    <div class="container">
+      <div class="how-header">
+        <div>
+          <div class="eyebrow">Como funciona</div>
+          <h2 class="display-lg" style="margin-top: 1rem;">Quatro passos para uma <span class="italic">adoção que dura.</span></h2>
+        </div>
+        <p class="body-lg">
+          Da primeira visita até o dia 90, o caminho é guiado. Você responde, a gente analisa,
+          a protetora aprova e seguimos juntos. Sem questionário interminável, sem improviso.
+        </p>
+      </div>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-step-num">01</div>
+          <h3 class="how-step-title">Responda 12 perguntas</h3>
+          <p class="how-step-desc">Conte sobre sua rotina, casa e disposição. Leva 4 minutos. A gente cruza com perfis de animais reais.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">02</div>
+          <h3 class="how-step-title">Veja seus matches</h3>
+          <p class="how-step-desc">Receba até 10 animais ordenados por compatibilidade, com explicação do porquê de cada match.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">03</div>
+          <h3 class="how-step-title">Verifique-se</h3>
+          <p class="how-step-desc">Validação simples por CPF, endereço e vídeo-tour curto da sua casa. Receba seu badge.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">04</div>
+          <h3 class="how-step-title">Assine e adote</h3>
+          <p class="how-step-desc">Termo digital com Período de Adaptação. Em seguida começa o programa PetWish Care de 90 dias.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section protectors-section" id="protetoras">
+    <div class="container protectors-grid">
+      <div class="protectors-content">
+        <div class="eyebrow">Para protetoras e ONGs</div>
+        <h2 class="display-lg">Você dá o amor.<br>A gente cuida <span class="italic">do resto.</span></h2>
+        <p class="body-lg">
+          Chega de Instagram + planilha + WhatsApp. O PetCRM é o primeiro software brasileiro
+          feito para quem resgata: gestão completa, divulgação automática e relatórios que
+          viabilizam patrocínio corporativo. Grátis até 10 animais.
+        </p>
+        <ul class="feature-list">
+          <li class="feature-item">
+            <span class="feature-check">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <div class="feature-text"><strong>Divulgação multiplataforma</strong> — gere posts para Instagram, Stories e link de WhatsApp em um clique.</div>
+          </li>
+          <li class="feature-item">
+            <span class="feature-check">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <div class="feature-text"><strong>Adotantes verificados</strong> — receba candidatos com CPF, endereço e vídeo já validados.</div>
+          </li>
+          <li class="feature-item">
+            <span class="feature-check">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <div class="feature-text"><strong>Doações via Pix integrado</strong> — checkout simples, relatórios automáticos para prestar contas.</div>
+          </li>
+          <li class="feature-item">
+            <span class="feature-check">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <div class="feature-text"><strong>Prontuário digital</strong> — histórico de saúde e comportamento que viaja com o animal para sempre.</div>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-primary btn-lg">
+          Quero o PetCRM grátis
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="quote-card">
+        <div class="quote-mark">"</div>
+        <p class="quote-text">
+          Já fiz tudo certo no questionário e mesmo assim me devolveram o cachorro depois
+          de duas semanas. Não dou mais conta sozinha de filtrar quem realmente quer adotar.
+        </p>
+        <div class="quote-author">
+          <div class="author-avatar">P</div>
+          <div>
+            <div class="author-name">Patrícia · 42 anos</div>
+            <div class="author-role">Protetora independente em Recife · 18 animais resgatados</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="differentials-header">
+        <div class="eyebrow">A realidade que queremos mudar</div>
+        <h2 class="display-lg">Dados oficiais que <span class="italic">não dá mais para ignorar.</span></h2>
+      </div>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-number">30 mi</div>
+          <div class="impact-label">de animais abandonados no Brasil, segundo a OMS.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-number">85%</div>
+          <div class="impact-label">é a taxa de devolução em até 90 dias em estudos regionais.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-number">87%</div>
+          <div class="impact-label">dos brasileiros dizem que suporte pós-adoção evitaria o abandono.</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-number">59%</div>
+          <div class="impact-label">das adoções no país acontecem fora de ONGs formais, sem rastreabilidade.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq-section" id="faq">
+    <div class="container faq-grid">
+      <div>
+        <div class="eyebrow">Dúvidas frequentes</div>
+        <h2 class="display-lg" style="margin-top: 1rem;">Tudo o que você precisa <span class="italic">saber antes.</span></h2>
+        <p class="body-md" style="margin-top: 1.5rem;">
+          Não achou sua dúvida aqui? Fale com a gente pelo WhatsApp e respondemos em
+          horário comercial.
+        </p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>
+            Adotar pela PetWish tem custo?
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </summary>
+          <div class="faq-answer">
+            Não. A adoção em si é totalmente gratuita. Você pode escolher consumir serviços
+            opcionais depois — como a consulta veterinária com desconto em clínica parceira —
+            mas isso é decisão sua, e nunca uma exigência da plataforma.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            O que é o Período de Adaptação de 15 dias?
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </summary>
+          <div class="faq-answer">
+            É um termo digital que oficializa os primeiros 15 dias da adoção. Se a adaptação
+            não funcionar nesse intervalo, você pode devolver o animal sem julgamento, e ele
+            volta à protetora original com prioridade de re-divulgação. Reduz o medo de
+            "errar" sem incentivar uso oportunista (há regras anti-abuso).
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            Como funciona o matching?
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </summary>
+          <div class="faq-answer">
+            Você responde 12 perguntas sobre rotina, espaço, experiência prévia e disposição.
+            Nosso algoritmo cruza essas respostas com o perfil comportamental do animal
+            (energia, sociabilidade, latido, etc.) e gera um score de 0 a 100 com explicação
+            dos pontos fortes do match.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            Por que vocês pedem CPF e vídeo da casa?
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </summary>
+          <div class="faq-answer">
+            Para dar segurança real para a protetora. Questionário escrito é facilmente
+            burlado — verificação multicamada (CPF + endereço + vídeo curto) reduz fraudes
+            e devoluções. Todos os dados são criptografados e seguem a LGPD; vídeos são
+            excluídos automaticamente após 90 dias.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            Sou protetora. Quanto custa o PetCRM?
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </summary>
+          <div class="faq-answer">
+            Grátis até 10 animais ativos. O Plano PRO (R$ 99/mês) libera animais ilimitados,
+            painel financeiro completo, relatórios para captação de patrocínio e
+            divulgação automatizada em múltiplos canais.
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>
+            Vocês operam em qual cidade?
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </summary>
+          <div class="faq-answer">
+            Estamos lançando em Recife/PE em 2026. Expansão para João Pessoa, Maceió e
+            depois capitais do Sudeste está prevista para os 6–12 meses seguintes,
+            conforme onboarding de clínicas veterinárias parceiras em cada região.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <div class="eyebrow" style="margin-bottom: 1.5rem;">Comece agora</div>
+        <h2 class="display-xl">
+          Tem um lar.<br>
+          Tem um <span class="italic">match esperando.</span>
+        </h2>
+        <p class="body-lg">
+          A primeira plataforma brasileira de adoção que trata cada animal como um
+          processo de 90 dias — não como uma entrega de fim de semana.
+        </p>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-primary btn-lg">
+            Encontrar meu match
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"/><path d="m18 15-2-2"/><path d="m15 18-2-2"/></svg>
+          </a>
+          <a href="#" class="btn btn-secondary btn-lg">
+            Cadastrar minha ONG
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+          </a>
+        </div>
+        <div class="cta-note">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          Dados protegidos pela LGPD · Sem cadastro obrigatório para navegar
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <span class="logo-mark">
+              <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="4" cy="8" r="2"/><circle cx="11" cy="15" r="2"/><path d="M8 22a4 4 0 0 1-4-4 7 7 0 0 1 7-7 7 7 0 0 1 7 7 4 4 0 0 1-4 4 2.5 2.5 0 0 1-1.5-.5 2.5 2.5 0 0 0-3 0A2.5 2.5 0 0 1 8 22Z"/></svg>
+            </span>
+            <span class="logo-name">Pet<span>Wish</span></span>
+          </a>
+          <p class="footer-tagline">
+            Adoção inteligente e responsável de animais. Tecnologia a serviço da causa
+            mais antiga do mundo: dar um lar a quem precisa.
+          </p>
+        </div>
+        <div>
+          <div class="footer-col-title">Plataforma</div>
+          <ul class="footer-links">
+            <li><a href="#como-funciona">Como funciona</a></li>
+            <li><a href="#diferenciais">Diferenciais</a></li>
+            <li><a href="#">Casos de sucesso</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Para ONGs</div>
+          <ul class="footer-links">
+            <li><a href="#protetoras">PetCRM</a></li>
+            <li><a href="#">Plano PRO</a></li>
+            <li><a href="#">Captação de doações</a></li>
+            <li><a href="#">Parcerias</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Institucional</div>
+          <ul class="footer-links">
+            <li><a href="#">Sobre nós</a></li>
+            <li><a href="#">Privacidade (LGPD)</a></li>
+            <li><a href="#">Termos de uso</a></li>
+            <li><a href="#">Contato</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 PetWish. Feito com cuidado em Recife.</div>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="WhatsApp">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
