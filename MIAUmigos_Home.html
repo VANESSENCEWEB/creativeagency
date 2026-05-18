@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>MIAUmigos — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange:   #E07B3A;
+      --orange-d: #B85E22;
+      --orange-l: #F5A96A;
+      --orange-xs:rgba(224,123,58,.1);
+      --cream:    #FAF4EC;
+      --cream-d:  #F0E5D3;
+      --cream-dd: #E4D3BC;
+      --brown:    #7A4A2A;
+      --brown-l:  #C4956A;
+      --ink:      #1C1209;
+      --ink-s:    #3D2510;
+      --gray:     #8C7B6A;
+      --gray-l:   #B5A898;
+      --white:    #FFFFFF;
+      --sage:     #7A9B78;
+      --sage-l:   #A8C4A6;
+      --red:      #E05A4A;
+      --ff:       'Poppins', sans-serif;
+      --fi:       'Inter', sans-serif;
+      --r-xs:     8px;
+      --r-sm:     12px;
+      --r-md:     18px;
+      --r-lg:     24px;
+      --r-xl:     32px;
+      --r-full:   999px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; }
+    body {
+      font-family: var(--ff);
+      background: #E8D8C4;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem 3rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── PHONE SHELL ── */
+    .phone {
+      width: 390px;
+      min-height: 844px;
+      background: var(--cream);
+      border-radius: 52px;
+      overflow: hidden;
+      position: relative;
+      box-shadow:
+        0 0 0 1px rgba(28,18,9,.12),
+        0 0 0 10px #1C1209,
+        0 0 0 12px rgba(255,255,255,.08),
+        0 40px 120px rgba(28,18,9,.5),
+        0 80px 200px rgba(28,18,9,.3);
+      flex-shrink: 0;
+    }
+
+    /* Dynamic Island */
+    .island {
+      position: absolute;
+      top: 12px; left: 50%;
+      transform: translateX(-50%);
+      width: 126px; height: 37px;
+      background: #1C1209;
+      border-radius: 20px;
+      z-index: 100;
+    }
+
+    /* ── APP INNER ── */
+    .app {
+      height: 844px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      position: relative;
+    }
+    .app::-webkit-scrollbar { display: none; }
+
+    /* ── STATUS BAR ── */
+    .status {
+      height: 60px;
+      padding: 18px 28px 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .status-time {
+      font-size: .875rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.01em;
+    }
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+    }
+    .status-icons svg {
+      width: 16px; height: 16px;
+      fill: var(--ink);
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      padding: .75rem 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -.02em;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .nav-notif {
+      width: 38px; height: 38px;
+      background: white;
+      border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(28,18,9,.08);
+      position: relative;
+      cursor: pointer;
+    }
+    .nav-notif svg { width: 20px; height: 20px; stroke: var(--ink); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .notif-dot {
+      position: absolute; top: 7px; right: 7px;
+      width: 8px; height: 8px;
+      background: var(--orange); border-radius: 50%;
+      border: 1.5px solid var(--cream);
+    }
+    .nav-avatar {
+      width: 38px; height: 38px;
+      border-radius: var(--r-sm);
+      background: linear-gradient(135deg, var(--orange), var(--orange-d));
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: .8125rem; font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(224,123,58,.3);
+    }
+
+    /* ── GREETING ── */
+    .greeting {
+      padding: 1rem 22px .75rem;
+      animation: fadeSlide .5s .05s both;
+    }
+    .greeting-sub {
+      font-family: var(--fi);
+      font-size: .8125rem; color: var(--gray);
+      margin-bottom: .2rem;
+    }
+    .greeting-title {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.02em;
+      line-height: 1.2;
+    }
+    .greeting-title span { color: var(--orange); }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      padding: 0 22px .75rem;
+      animation: fadeSlide .5s .1s both;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      background: white;
+      border-radius: var(--r-md);
+      padding: .75rem 1rem;
+      box-shadow: 0 2px 12px rgba(28,18,9,.06);
+    }
+    .search-icon { color: var(--gray-l); }
+    .search-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .search-text {
+      font-family: var(--fi);
+      font-size: .9rem; color: var(--gray-l);
+    }
+    .search-filter {
+      margin-left: auto;
+      width: 32px; height: 32px;
+      background: var(--orange-xs);
+      border-radius: var(--r-xs);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--orange); cursor: pointer;
+    }
+    .search-filter svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── CARE ALERT ── */
+    .care-alert {
+      margin: 0 22px .75rem;
+      background: linear-gradient(135deg, var(--orange), var(--orange-d));
+      border-radius: var(--r-md);
+      padding: 1rem 1.1rem;
+      display: flex; align-items: center; gap: .85rem;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(224,123,58,.3);
+      animation: fadeSlide .5s .15s both;
+      position: relative;
+      overflow: hidden;
+    }
+    .care-alert::before {
+      content: '';
+      position: absolute; top: -20px; right: -20px;
+      width: 80px; height: 80px;
+      background: rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+    .care-icon {
+      width: 42px; height: 42px;
+      background: rgba(255,255,255,.15);
+      border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 1.25rem;
+    }
+    .care-text { flex: 1; }
+    .care-label {
+      font-size: .65rem; font-weight: 700;
+      color: rgba(255,255,255,.7);
+      letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: .15rem;
+    }
+    .care-title {
+      font-size: .9rem; font-weight: 700;
+      color: white; line-height: 1.3;
+    }
+    .care-arrow {
+      color: rgba(255,255,255,.7);
+    }
+    .care-arrow svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── SECTION HEADER ── */
+    .sec {
+      padding: .5rem 22px .6rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .sec-title {
+      font-size: 1rem; font-weight: 700;
+      color: var(--ink); letter-spacing: -.01em;
+    }
+    .sec-link {
+      font-family: var(--fi);
+      font-size: .8125rem; font-weight: 500;
+      color: var(--orange); cursor: pointer;
+    }
+
+    /* ── CATEGORY PILLS ── */
+    .cats {
+      padding: 0 22px .75rem;
+      display: flex; gap: .5rem;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      animation: fadeSlide .5s .2s both;
+    }
+    .cats::-webkit-scrollbar { display: none; }
+    .cat-pill {
+      display: flex; align-items: center; gap: .4rem;
+      padding: .45rem .9rem;
+      border-radius: var(--r-full);
+      font-family: var(--fi);
+      font-size: .8rem; font-weight: 600;
+      white-space: nowrap; cursor: pointer;
+      transition: all .2s;
+      flex-shrink: 0;
+    }
+    .cat-pill.active {
+      background: var(--orange);
+      color: white;
+      box-shadow: 0 4px 12px rgba(224,123,58,.3);
+    }
+    .cat-pill:not(.active) {
+      background: white;
+      color: var(--ink-s);
+      box-shadow: 0 1px 4px rgba(28,18,9,.08);
+    }
+    .cat-pill:not(.active):hover { background: var(--cream-d); }
+
+    /* ── MATCH CARDS (horizontal scroll) ── */
+    .matches-scroll {
+      padding: 0 22px .25rem;
+      display: flex; gap: .85rem;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      animation: fadeSlide .5s .25s both;
+    }
+    .matches-scroll::-webkit-scrollbar { display: none; }
+
+    .match-card {
+      flex-shrink: 0;
+      width: 200px;
+      background: white;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(28,18,9,.08);
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .match-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(28,18,9,.14); }
+    .match-card:active { transform: scale(.97); }
+
+    .card-img {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-img-bg {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4.5rem;
+    }
+    .card-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,18,9,.4) 0%, transparent 50%);
+    }
+    .card-match-badge {
+      position: absolute; bottom: 8px; left: 10px;
+      display: flex; align-items: center; gap: .3rem;
+      padding: .25rem .6rem;
+      background: rgba(255,255,255,.95);
+      border-radius: var(--r-full);
+      font-size: .65rem; font-weight: 700;
+      color: var(--sage);
+      backdrop-filter: blur(8px);
+    }
+    .match-dot { width: 6px; height: 6px; background: var(--sage); border-radius: 50%; }
+    .card-fav {
+      position: absolute; top: 10px; right: 10px;
+      width: 32px; height: 32px;
+      background: rgba(255,255,255,.9);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all .2s;
+    }
+    .card-fav:hover { background: white; transform: scale(1.1); }
+    .card-fav svg { width: 16px; height: 16px; stroke: var(--gray); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .card-fav.liked svg { stroke: var(--red); fill: var(--red); }
+
+    .card-body { padding: .9rem .95rem .95rem; }
+    .card-row1 {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: .3rem;
+    }
+    .card-name {
+      font-size: 1rem; font-weight: 700;
+      color: var(--ink); letter-spacing: -.01em;
+    }
+    .card-age {
+      font-family: var(--fi);
+      font-size: .7rem; color: var(--gray);
+      background: var(--cream);
+      padding: .15rem .5rem;
+      border-radius: var(--r-full);
+      font-weight: 500;
+    }
+    .card-meta {
+      font-family: var(--fi);
+      font-size: .75rem; color: var(--gray);
+      margin-bottom: .6rem;
+      display: flex; align-items: center; gap: .3rem;
+    }
+    .card-meta svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .card-tags { display: flex; gap: .35rem; flex-wrap: wrap; }
+    .tag {
+      font-family: var(--fi);
+      font-size: .65rem; font-weight: 600;
+      padding: .2rem .55rem;
+      border-radius: var(--r-full);
+    }
+    .tag-e { background: rgba(224,123,58,.1); color: var(--orange-d); }
+    .tag-s { background: rgba(122,155,120,.12); color: var(--sage); }
+    .tag-b { background: rgba(196,149,106,.15); color: var(--brown); }
+
+    /* ── NEARBY LIST ── */
+    .list-cards {
+      padding: 0 22px;
+      display: flex; flex-direction: column; gap: .7rem;
+      animation: fadeSlide .5s .3s both;
+    }
+    .list-card {
+      background: white;
+      border-radius: var(--r-md);
+      padding: .9rem;
+      display: flex; align-items: center; gap: .9rem;
+      box-shadow: 0 2px 8px rgba(28,18,9,.06);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .list-card:hover { transform: translateX(3px); box-shadow: 0 4px 16px rgba(28,18,9,.1); }
+    .list-img {
+      width: 64px; height: 64px; flex-shrink: 0;
+      border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .list-info { flex: 1; min-width: 0; }
+    .list-row1 {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: .15rem;
+    }
+    .list-name {
+      font-size: .9375rem; font-weight: 700;
+      color: var(--ink); letter-spacing: -.01em;
+    }
+    .list-match {
+      font-family: var(--fi);
+      font-size: .7rem; font-weight: 700;
+      color: var(--sage);
+      background: rgba(122,155,120,.1);
+      padding: .15rem .5rem; border-radius: var(--r-full);
+    }
+    .list-meta {
+      font-family: var(--fi);
+      font-size: .75rem; color: var(--gray);
+      margin-bottom: .4rem;
+    }
+    .list-tags { display: flex; gap: .3rem; }
+    .list-arrow {
+      color: var(--gray-l); flex-shrink: 0;
+    }
+    .list-arrow svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── STATS BANNER ── */
+    .stats-banner {
+      margin: .5rem 22px .5rem;
+      background: linear-gradient(135deg, var(--ink), var(--ink-s));
+      border-radius: var(--r-lg);
+      padding: 1.1rem 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .5rem;
+      animation: fadeSlide .5s .35s both;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: 1.25rem; font-weight: 800;
+      color: var(--orange-l);
+      letter-spacing: -.02em; line-height: 1;
+      margin-bottom: .25rem;
+    }
+    .stat-lbl {
+      font-family: var(--fi);
+      font-size: .6rem; font-weight: 500;
+      color: rgba(255,255,255,.5);
+      line-height: 1.3;
+    }
+    .stat-div {
+      width: 1px; height: 100%;
+      background: rgba(255,255,255,.08);
+    }
+
+    /* ── BOTTOM NAV ── */
+    .bottom-nav {
+      position: sticky;
+      bottom: 0;
+      background: white;
+      border-top: 1px solid rgba(28,18,9,.06);
+      padding: .7rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 50;
+    }
+    .nav-item {
+      display: flex; flex-direction: column; align-items: center;
+      gap: .3rem; cursor: pointer; padding: .25rem .5rem;
+      transition: all .2s;
+    }
+    .nav-item.active .nav-icon { background: var(--orange-xs); color: var(--orange); }
+    .nav-item.active .nav-label { color: var(--orange); }
+    .nav-icon {
+      width: 42px; height: 42px;
+      border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-l); transition: all .2s;
+    }
+    .nav-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .nav-label {
+      font-family: var(--fi);
+      font-size: .625rem; font-weight: 600;
+      color: var(--gray-l);
+      letter-spacing: .02em;
+    }
+    .nav-add {
+      width: 52px; height: 52px;
+      background: var(--orange);
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; cursor: pointer;
+      box-shadow: 0 6px 18px rgba(224,123,58,.4);
+      transform: translateY(-6px);
+      transition: all .2s;
+    }
+    .nav-add:hover { transform: translateY(-8px); box-shadow: 0 10px 24px rgba(224,123,58,.5); }
+    .nav-add svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── SPACING ── */
+    .spacer { height: .75rem; }
+    .spacer-sm { height: .5rem; }
+
+    /* ── DESKTOP CONTEXT ── */
+    @media (min-width: 500px) {
+      body { padding: 3rem 2rem 4rem; background: #D4BFA4; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+  <!-- Dynamic island -->
+  <div class="island"></div>
+
+  <div class="app">
+
+    <!-- STATUS BAR -->
+    <div class="status">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <!-- signal -->
+        <svg viewBox="0 0 24 24"><rect x="2" y="14" width="3" height="6" rx="1"/><rect x="8" y="10" width="3" height="10" rx="1"/><rect x="14" y="6" width="3" height="14" rx="1"/><rect x="20" y="2" width="3" height="18" rx="1"/></svg>
+        <!-- wifi -->
+        <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="#1C1209"/></svg>
+        <!-- battery -->
+        <svg viewBox="0 0 24 24"><rect x="1" y="6" width="18" height="12" rx="2"/><path d="M23 13v-2" stroke-width="3" stroke-linecap="round"/><rect x="3" y="8" width="11" height="8" rx="1" fill="#1C1209"/></svg>
+      </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <div class="nav-logo">MIAU<span>migos</span></div>
+      <div class="nav-right">
+        <div class="nav-notif">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <div class="notif-dot"></div>
+        </div>
+        <div class="nav-avatar">VL</div>
+      </div>
+    </div>
+
+    <!-- GREETING -->
+    <div class="greeting">
+      <div class="greeting-sub">Bom dia, Vanessa 👋</div>
+      <div class="greeting-title">Seu próximo amigo <span>está te esperando.</span></div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-wrap">
+      <div class="search-bar">
+        <span class="search-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </span>
+        <span class="search-text">Buscar por nome, raça, cidade…</span>
+        <span class="search-filter">
+          <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+        </span>
+      </div>
+    </div>
+
+    <!-- CARE ALERT -->
+    <div class="care-alert">
+      <div class="care-icon">🐾</div>
+      <div class="care-text">
+        <div class="care-label">PetWish Care · Dia 7</div>
+        <div class="care-title">Como está a adaptação do Bidu?</div>
+      </div>
+      <span class="care-arrow">
+        <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      </span>
+    </div>
+
+    <div class="spacer-sm"></div>
+
+    <!-- CATEGORIES -->
+    <div class="sec" style="padding-bottom:.4rem">
+      <span class="sec-title">Encontrar</span>
+    </div>
+    <div class="cats">
+      <div class="cat-pill active">🐾 Todos</div>
+      <div class="cat-pill">🐶 Cachorros</div>
+      <div class="cat-pill">🐱 Gatos</div>
+      <div class="cat-pill">🏠 Perto de mim</div>
+      <div class="cat-pill">⚡ Alta compatibilidade</div>
+    </div>
+
+    <!-- MATCH CARDS -->
+    <div class="sec">
+      <span class="sec-title">Seus matches hoje</span>
+      <span class="sec-link">Ver todos</span>
+    </div>
+
+    <div class="matches-scroll">
+
+      <!-- Card 1 -->
+      <div class="match-card">
+        <div class="card-img">
+          <div class="card-img-bg" style="background:linear-gradient(135deg,#F4D8C0,#E8A578)">🐶</div>
+          <div class="card-img-overlay"></div>
+          <div class="card-match-badge">
+            <span class="match-dot"></span>
+            Match 94%
+          </div>
+          <div class="card-fav liked">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-row1">
+            <span class="card-name">Bidu</span>
+            <span class="card-age">2 anos</span>
+          </div>
+          <div class="card-meta">
+            <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Boa Viagem · Recife
+          </div>
+          <div class="card-tags">
+            <span class="tag tag-s">Calmo</span>
+            <span class="tag tag-e">Brincalhão</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="match-card">
+        <div class="card-img">
+          <div class="card-img-bg" style="background:linear-gradient(135deg,#D4C5E0,#A89BC4)">🐱</div>
+          <div class="card-img-overlay"></div>
+          <div class="card-match-badge">
+            <span class="match-dot"></span>
+            Match 89%
+          </div>
+          <div class="card-fav">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-row1">
+            <span class="card-name">Luna</span>
+            <span class="card-age">1 ano</span>
+          </div>
+          <div class="card-meta">
+            <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Olinda · PE
+          </div>
+          <div class="card-tags">
+            <span class="tag tag-s">Independente</span>
+            <span class="tag tag-b">Afetuosa</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="match-card">
+        <div class="card-img">
+          <div class="card-img-bg" style="background:linear-gradient(135deg,#C7D3C6,#8FA68E)">🐶</div>
+          <div class="card-img-overlay"></div>
+          <div class="card-match-badge">
+            <span class="match-dot"></span>
+            Match 82%
+          </div>
+          <div class="card-fav">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-row1">
+            <span class="card-name">Theo</span>
+            <span class="card-age">4 anos</span>
+          </div>
+          <div class="card-meta">
+            <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Afogados · Recife
+          </div>
+          <div class="card-tags">
+            <span class="tag tag-e">Energético</span>
+            <span class="tag tag-b">Protetor</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="match-card">
+        <div class="card-img">
+          <div class="card-img-bg" style="background:linear-gradient(135deg,#F4E0C0,#E8C078)">🐱</div>
+          <div class="card-img-overlay"></div>
+          <div class="card-match-badge">
+            <span class="match-dot"></span>
+            Match 77%
+          </div>
+          <div class="card-fav">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-row1">
+            <span class="card-name">Mel</span>
+            <span class="card-age">3 anos</span>
+          </div>
+          <div class="card-meta">
+            <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            Casa Amarela · Recife
+          </div>
+          <div class="card-tags">
+            <span class="tag tag-s">Tímida</span>
+            <span class="tag tag-b">Dócil</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- STATS BANNER -->
+    <div class="stats-banner">
+      <div class="stat-item">
+        <div class="stat-num">247</div>
+        <div class="stat-lbl">Animais disponíveis</div>
+      </div>
+      <div class="stat-item" style="border-left:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08)">
+        <div class="stat-num">89</div>
+        <div class="stat-lbl">Adoções este mês</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">&lt;8%</div>
+        <div class="stat-lbl">Taxa de devolução</div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- NEARBY LIST -->
+    <div class="sec">
+      <span class="sec-title">Perto de você</span>
+      <span class="sec-link">Ver no mapa</span>
+    </div>
+
+    <div class="list-cards">
+
+      <div class="list-card">
+        <div class="list-img" style="background:linear-gradient(135deg,#E8D8C0,#C4956A)">🐶</div>
+        <div class="list-info">
+          <div class="list-row1">
+            <span class="list-name">Max</span>
+            <span class="list-match">Match 91%</span>
+          </div>
+          <div class="list-meta">3 anos · Porte médio · Torre · 1.2 km</div>
+          <div class="list-tags">
+            <span class="tag tag-s">Sociável</span>
+            <span class="tag tag-e">Ativo</span>
+          </div>
+        </div>
+        <span class="list-arrow">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+      </div>
+
+      <div class="list-card">
+        <div class="list-img" style="background:linear-gradient(135deg,#C7D3E8,#7A9BC4)">🐱</div>
+        <div class="list-info">
+          <div class="list-row1">
+            <span class="list-name">Nina</span>
+            <span class="list-match">Match 86%</span>
+          </div>
+          <div class="list-meta">2 anos · Porte pequeno · Espinheiro · 1.8 km</div>
+          <div class="list-tags">
+            <span class="tag tag-b">Quieta</span>
+            <span class="tag tag-s">Castrada</span>
+          </div>
+        </div>
+        <span class="list-arrow">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+      </div>
+
+      <div class="list-card">
+        <div class="list-img" style="background:linear-gradient(135deg,#E8D0C0,#B87A5A)">🐶</div>
+        <div class="list-info">
+          <div class="list-row1">
+            <span class="list-name">Thor</span>
+            <span class="list-match">Match 79%</span>
+          </div>
+          <div class="list-meta">1 ano · Porte grande · Graças · 2.4 km</div>
+          <div class="list-tags">
+            <span class="tag tag-e">Filhote</span>
+            <span class="tag tag-b">Vacinado</span>
+          </div>
+        </div>
+        <span class="list-arrow">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+      </div>
+
+    </div>
+
+    <div class="spacer"></div>
+    <div class="spacer"></div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+      <div class="nav-item active">
+        <div class="nav-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9.5 12 4l9 5.5"/><path d="M5 9v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/></svg>
+        </div>
+        <span class="nav-label">Início</span>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <span class="nav-label">Explorar</span>
+      </div>
+      <div class="nav-add">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <span class="nav-label">Favoritos</span>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <span class="nav-label">Perfil</span>
+      </div>
+    </div>
+
+  </div><!-- /app -->
+</div><!-- /phone -->
+
+<script>
+  // Toggle favorites
+  document.querySelectorAll('.card-fav').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      btn.classList.toggle('liked');
+    });
+  });
+
+  // Category pills
+  document.querySelectorAll('.cat-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+    });
+  });
+
+  // Bottom nav
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
